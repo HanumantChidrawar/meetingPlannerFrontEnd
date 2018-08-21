@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
           (error) => {
             this.spinner.hide();
             this.toastr.error("Some error occured");
+            console.log(error);
             this.router.navigate(['/serverError']);
           });
     }
