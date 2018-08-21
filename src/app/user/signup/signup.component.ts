@@ -142,12 +142,11 @@ export class SignupComponent implements OnInit {
   public checkAdmin(flag:boolean){
 
     this.isAdmin = flag;
-    console.log(this.isAdmin);
 
   }//end checkAdmin
-  public validateUserName(name:string){
+  public validateUserName(){
 
-    if(name.indexOf("admin")){
+    if(this.userName.indexOf("admin") != -1){
       return true;
     }else{
       return false;

@@ -88,7 +88,7 @@
   
           <div *ngIf="isAdmin && userName">
   
-            <div *ngIf="validateUserName(userName)" class="alert alert-danger">
+            <div *ngIf="!validateUserName()" class="alert alert-danger">
   
               ** Invalid User Name as admin!
   
