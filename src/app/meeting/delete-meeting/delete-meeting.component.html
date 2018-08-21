@@ -1,0 +1,101 @@
+<section class="container">
+
+    <div class="row">
+  
+      <h2 class="col-12 text-danger">Are you sure following Meeting will be cancelled ?</h2>
+  
+    </div>
+  
+    <div class="row">
+  
+      <form #meetingSchedule="ngForm" class="col-12">
+        <span class="form-heading">Meeting Host </span>
+  
+        <label for="inputHostName" class="sr-only">Meeting Host:</label>
+  
+        <input type="text" name="hostName" [(ngModel)]="hostName" class="form-control" placeholder="Host Name" readonly>
+  
+        <br>
+        <span class="form-heading">Meeting With </span>
+  
+        <label for="inputWithName" class="sr-only">Meeting with:</label>
+  
+        <input type="text" name="meetingWithName" [(ngModel)]="meetingWithName" class="form-control" placeholder="Meeting With Name" readonly>
+        <br>
+  
+        <span class="form-heading">Title </span>
+  
+        <label for="inputTitle" class="sr-only">Title:</label>
+  
+        <input type="text" #title1="ngModel" pattern="^[A-Z][A-za-z ][0-9]+$" minlength="4" name="title" id="MeetingTitle" class="form-control"
+          [(ngModel)]="title" placeholder="Meeting Title" readonly>
+        <br>
+  
+        <div [hidden]="title1.pristine || title1.valid" class="alert alert-danger">
+          <div *ngIf="title1.errors?.pattern">
+            ** Meeting Title should start with Capital letter.
+            <div *ngIf="title1.errors?.minlength">
+              ** Meeting Title should contain minimum 4 Chatracters!
+            </div>
+          </div>
+          <div *ngIf="title1.errors?.required">
+            ** Meeting Title is required!
+          </div>
+  
+        </div>
+  
+        <span class="form-heading">Start Time </span>
+  
+        <label for="startTime" class="sr-only">Start Time:</label>
+        <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" name="startDate" [(ngModel)]="startDate" placeholder="Date Time" readonly>
+        <owl-date-time #dt1></owl-date-time>
+        <br>
+        <br/>
+  
+        <span class="form-heading">End Time </span>
+  
+        <label for="endTime" class="sr-only">End Time:</label>
+        <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" name="endDate" [(ngModel)]="endDate" placeholder="Date Time" readonly>
+        <owl-date-time #dt2></owl-date-time>
+        <br>
+        <br/>
+  
+        <span class="form-heading">Venue </span>
+  
+        <label for="venue" class="sr-only">Venue:</label>
+  
+        <input type="text" #venue1="ngModel" pattern="^[A-Z][A-za-z0-9-,. ]+$" minlength="4" name="venue" [(ngModel)]="venue" class="form-control"
+          id="venue" placeholder="Where to Meet" readonly>
+        <br>
+  
+        <div [hidden]="venue1.pristine || venue1.valid" class="alert alert-danger">
+          <div *ngIf="venue1.errors?.pattern">
+            ** Venue Name should only start with Capital and contain letters,numbers,hyphen,comma,fullstop !
+            <div *ngIf="venue1.errors?.minlength">
+              ** Venue Name should be of minimum 4 Characters!
+            </div>
+          </div>
+          <div *ngIf="venue1.errors?.required">
+            ** Venue Name is required!
+          </div>
+  
+        </div>
+  
+        <span class="form-heading">Purpose</span>
+  
+        <label for="inputPurpose" class="sr-only">Purpose:</label>
+  
+        <input type="text" #purpose1="ngModel" name="purpose" [(ngModel)]="purpose" class="form-control" id="inputPurpose" placeholder="Purpose of the Meeting"
+        readonly>
+        <br/>
+        <div [hidden]="purpose1.pristine || purpose1.valid" class="alert alert-danger">
+          <div *ngIf="purpose1.errors?.required">
+            ** Purpose is required!
+          </div>
+        </div>
+        <button class="col-6 btn btn-danger" (click)="deleteMeeting()">Cancel Meeting</button>
+        <button class="col-6 btn btn-info" (click)="goBack()">Cancel</button>
+      </form>
+    </div>
+  
+  </section>

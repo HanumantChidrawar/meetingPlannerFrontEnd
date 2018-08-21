@@ -1,0 +1,262 @@
+<section class="container-fluid">
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Meeting Planner</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link btn " (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row" >
+    <h3 class="col-12">Drag a normal user to schedule a Meeting</h3>
+
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <ul class="list-group col-12" *ngFor="let user of allUsers" mwlDraggable (dragEnd)="dragEnd($event,user)">
+          <li class="list-group-item">
+            <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+            <p class="card-text">User Name: {{user.firstName}}</p>
+            <div *ngIf="user.status1 == 'online'">
+              <p class="card-text"> Online
+                <i class="online"></i>
+              </p>
+            </div>
+            <div *ngIf="user.status1 == 'offline'">
+              <p class="card-text"> Offline
+                <i class="offline"></i>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+
+    <div class="col-12 col-md-6">
+
+      <div  mwlDroppable>
+        <span>Drop here</span>
+        <div class="card" *ngIf="draggedUser">
+            <img class="card-img-top" src="../../assets/user.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{draggedUser.firstName}} {{draggedUser.lastName}}</h5>
+              <p class="card-text">User Name: {{draggedUser.firstName}}</p>
+              <div *ngIf="draggedUser.status1 == 'online'">
+                <p class="card-text"> Online <i class="online"></i></p>
+              </div>
+              <div *ngIf="draggedUser.status1 == 'offline'">
+                <p class="card-text"> Offline <i class="offline"></i></p>
+              </div>
+            </div>
+          </div>
+          <div class="align-self-center row" *ngIf="draggedUser">
+              <a class="btn btn-success col-6" [routerLink]="['/create']">Schedule a meeting</a>
+              <button class="btn btn-secondary col-6" (click)="deSelectUser()">Un-Select User</button>
+            </div>
+            
+      </div>
+    </div><!-- end of droppable area -->
+  </div><!-- end of first row -->
+
+  <div class="row">
+    <div class="col-12">
+      <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+          <h5 class="modal-title">
+
+            <h2 class="heading">
+              <u>
+                <b>Meeting Details</b>
+              </u>
+            </h2>
+          </h5>
+          <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body back-img">
+
+          <table class="table table-bordered">
+
+            <thead>
+              <tr>
+                <th colspan = "2" > Meeting Details </th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              <tr>
+                <td>
+                  Host By:
+                </td>
+                <td>
+                  {{ modalData?.event.hostName}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Title:
+                </td>
+                <td>
+                  {{ modalData?.event.title}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Start Date & Time:
+                </td>
+                <td>
+                  {{ modalData?.event.startDate | date: 'medium'}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Till Date & Time :
+                </td>
+                <td>
+                  {{ modalData?.event.endDate | date: 'medium'}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Venue:
+                </td>
+                <td>
+                  {{ modalData?.event.venue}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Purpose:
+                </td>
+                <td>
+                  {{ modalData?.event.purpose}}
+                </td>
+              </tr>
+            </tbody>
+          
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+        </div>
+      </ng-template>
+
+      <ng-template #alertContent let-close="close">
+        <div class="modal-header">
+          <h5 class="modal-title">
+
+            <h2 class="heading">
+              <u>
+                <b>Meeting Reminder</b>
+              </u>
+            </h2>
+          </h5>
+          <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <h4 class="text-center text-success">Your meeting '{{ modalData?.event.title}}' will start soon!</h4>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" (click)="close();remindAgain = true">Snooze</button>
+          <button type="button" class="btn btn-outline-danger" (click)="remindAgain = false;close()">Dismiss</button>
+        </div>
+      </ng-template>
+
+      <div class="row text-center">
+        <div class="col-12">Meeting Calendar of {{receiverName}} </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+              Previous
+            </div>
+            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+              Today
+            </div>
+            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
+              Next
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div class="btn btn-primary" (click)="view = 'month'" [class.active]="view === 'month'">
+              Month
+            </div>
+            <div class="btn btn-primary" (click)="view = 'week'" [class.active]="view === 'week'">
+              Week
+            </div>
+            <div class="btn btn-primary" (click)="view = 'day'" [class.active]="view === 'day'">
+              Day
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+          (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+
+        <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+      </div>
+    </div>
+  </div>
+  <br> <br>
+
+  <table class="table table-bordered table-responsive" *ngIf="events.length > 0">
+
+      <thead>
+        <tr>
+          <th> Meeting Title</th>
+          <th>Starts at</th>
+          <th>Ends at</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <tr *ngFor="let event of events; let index = index">
+          <td>
+            {{event.title}}
+          </td>
+          <td>
+            {{event.start}}
+          </td>
+          <td>
+            {{event.end}}
+          </td>
+          <td>
+            <a class="btn btn-outline-warning" [routerLink]="['/update',event.meetingId]"> Edit Meeting</a>
+          </td>
+          <td>
+            <a class="btn btn-outline-danger" [routerLink]="['/delete',event.meetingId]"> Delete Meeting</a>
+          </td>
+        </tr>
+      </tbody>
+    
+    </table>
+</section>
