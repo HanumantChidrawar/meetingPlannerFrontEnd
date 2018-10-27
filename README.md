@@ -20,7 +20,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ![alt loginPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/meetingPlannerLogin.png)
 
 ## SignUp Page
-![alt signupPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/meetingPlannerSignUp.png)
+![alt signupPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/meetingPlannerSigUp.png)
 
 ## General Dashboard
 ![alt generalDashboard](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/generalDashboard.png)
@@ -81,4 +81,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 # Problem Statement
 
-
+![alt MeetingPlannerStatement] (https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/Web030102%2B-%2BMeeting%2BPlanner.pdf)
