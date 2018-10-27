@@ -81,4 +81,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 # Problem Statement
 
-![alt MeetingPlannerStatement] (https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/Web030102%2B-%2BMeeting%2BPlanner.pdf)
+[MeetingPlannerStatement](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/Web030102%2B-%2BMeeting%2BPlanner.pdf)
