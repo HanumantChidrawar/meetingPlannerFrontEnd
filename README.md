@@ -17,19 +17,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Login Page
-![alt loginPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/tree/master/pageLook/meetingPlannerLogin.png)
+![alt loginPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/meetingPlannerLogin.png)
 
 ## SignUp Page
-![alt signupPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/tree/master/pageLook/meetingPlannerSignUp.png)
+![alt signupPage](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/meetingPlannerSignUp.png)
 
 ## General Dashboard
-![alt generalDashboard](https://github.com/HanumantChidrawar/meetingPlannerFrontend/tree/master/pageLook/generalDashboard.png)
+![alt generalDashboard](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/generalDashboard.png)
 
 ## Admin Dashboard
-![alt adminDashboard](https://github.com/HanumantChidrawar/meetingPlannerFrontend/tree/master/pageLook/adminDashboard.png)
+![alt adminDashboard](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/adminDashboard.png)
 
 ## Admin Dashboard User Selected
-![alt adminDashboard1](https://github.com/HanumantChidrawar/meetingPlannerFrontend/tree/master/pageLook/adminDashboardSelected.png)
+![alt adminDashboard1](https://github.com/HanumantChidrawar/meetingPlannerFrontend/blob/master/pageLook/adminDashboardSelected.png)
 
 # Login Page
 
